@@ -1,6 +1,7 @@
 public class EvaluadorExpresion {
     private ArbolExpresion arbolExpresion;
 
+    // esto recibe un string -> la expresion = (x+1 * 3)
     public EvaluadorExpresion(String expresion) {
         arbolExpresion = new ArbolExpresion(expresion);
     }
