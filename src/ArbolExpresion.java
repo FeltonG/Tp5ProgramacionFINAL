@@ -1,114 +1,104 @@
-import java.util.Map;
 import java.util.Stack;
 
 public class ArbolExpresion {
+    private NodoArbol raiz;
 
-    private boolean isOperator(String c) {
-        return c.equals("+") || c.equals("-") || c.equals("*") || c.equals("/");
+    public ArbolExpresion(String expresion) {
+        raiz = construirArbol(expresion);
     }
 
-    // Función para construir un árbol de expresión a partir de una expresión postfix
-    public Node constructTree(String[] postfix) {
-        Stack<Node> stack = new Stack<>();
-        Node t, t1, t2;
+    private NodoArbol construirArbol(String expresion) {
+        Stack<NodoArbol> stack = new Stack<>();
+        NodoArbol t, t1, t2;
 
-        // Recorre cada token de la expresión postfix
-        for (String s : postfix) {
-            // Si el token no es un operador, crea un nodo y lo añade al stack
-            if (!isOperator(s)) {
-                t = new Node(s);
+        for (int i = 0; i < expresion.length(); i++) {
+            char current = expresion.charAt(i);
+
+            if (!esOperador(current)) {
+                t = new NodoArbol(Character.toString(current));
                 stack.push(t);
-            } else { // Si es un operador
-                t = new Node(s);
+            } else {
+                t = new NodoArbol(Character.toString(current));
 
-                // Saca los dos nodos superiores del stack
                 t1 = stack.pop();
                 t2 = stack.pop();
 
-                // Los asigna como hijos izquierdo y derecho del nodo actual
-                t.right = t1;
-                t.left = t2;
+                t.derecha = t1;
+                t.izquierda = t2;
 
-                // Añade esta subexpresión al stack
                 stack.push(t);
             }
         }
 
-        // El único elemento restante en el stack es la raíz del árbol de expresión
         t = stack.peek();
         stack.pop();
 
         return t;
     }
 
-    // Función para evaluar el árbol de expresión con variables
-    public double evaluate(Node root, Map<String, Double> variables) {
-        if (root == null) {
+    private boolean esOperador(char c) {
+        return c == '+' || c == '-' || c == '*' || c == '/';
+    }
+
+    public double evaluar(NodoArbol nodo, double valorVariable) {
+        if (nodo == null) {
             return 0;
         }
 
-        // Nodo hoja (operando o variable)
-        if (root.left == null && root.right == null) {
-            if (variables.containsKey(root.value)) {
-                return variables.get(root.value);
+        if (!esOperador(nodo.valor.charAt(0))) {
+            if (nodo.valor.equals("x")) {
+                return valorVariable;
             } else {
-                return Double.parseDouble(root.value);
+                return Double.parseDouble(nodo.valor);
             }
         }
 
-        // Evalúa el subárbol izquierdo
-        double leftEval = evaluate(root.left, variables);
+        double izquierdaEval = evaluar(nodo.izquierda, valorVariable);
+        double derechaEval = evaluar(nodo.derecha, valorVariable);
 
-        // Evalúa el subárbol derecho
-        double rightEval = evaluate(root.right, variables);
-
-        // Aplica el operador correspondiente
-        switch (root.value) {
+        switch (nodo.valor) {
             case "+":
-                return leftEval + rightEval;
+                return izquierdaEval + derechaEval;
             case "-":
-                return leftEval - rightEval;
+                return izquierdaEval - derechaEval;
             case "*":
-                return leftEval * rightEval;
+                return izquierdaEval * derechaEval;
             case "/":
-                if (rightEval == 0) {
-                    throw new ArithmeticException("División por cero");
-                }
-                return leftEval / rightEval;
-            default:
-                return 0;
+                return izquierdaEval / derechaEval;
+        }
+
+        return 0;
+    }
+
+    public double evaluar(double valorVariable) {
+        return evaluar(raiz, valorVariable);
+    }
+
+    public void recorridoInOrden(NodoArbol nodo) {
+        if (nodo != null) {
+            recorridoInOrden(nodo.izquierda);
+            System.out.print(nodo.valor + " ");
+            recorridoInOrden(nodo.derecha);
         }
     }
 
-    // recorridos
-
-    // Recorrido in-order del árbol
-    public void inorder(Node node) {
-        if (node == null) {
-            return;
+    public void recorridoPreOrden(NodoArbol nodo) {
+        if (nodo != null) {
+            System.out.print(nodo.valor + " ");
+            recorridoPreOrden(nodo.izquierda);
+            recorridoPreOrden(nodo.derecha);
         }
-        inorder(node.left);
-        System.out.print(node.value + " ");
-        inorder(node.right);
     }
 
-    // Recorrido pre-order del árbol
-    public void preorder(Node node) {
-        if (node == null) {
-            return;
+    public void recorridoPostOrden(NodoArbol nodo) {
+        if (nodo != null) {
+            recorridoPostOrden(nodo.izquierda);
+            recorridoPostOrden(nodo.derecha);
+            System.out.print(nodo.valor + " ");
         }
-        System.out.print(node.value + " ");
-        preorder(node.left);
-        preorder(node.right);
     }
 
-    // Recorrido post-order del árbol
-    public void postorder(Node node) {
-        if (node == null) {
-            return;
-        }
-        postorder(node.left);
-        postorder(node.right);
-        System.out.print(node.value + " ");
+    public NodoArbol getRaiz() {
+        return raiz;
     }
 }
