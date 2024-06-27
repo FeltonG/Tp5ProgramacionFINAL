@@ -115,31 +115,31 @@ public class ArbolExpresion {
         return evaluar(raiz, valorVariable);
     }
 
-    public void recorridoInOrden(NodoArbol nodo) {
-        if (nodo != null) {
-            recorridoInOrden(nodo.izquierda);
-            System.out.print(nodo.valor + " ");
-            recorridoInOrden(nodo.derecha);
-        }
-    }
-
-    public void recorridoPreOrden(NodoArbol nodo) {
-        if (nodo != null) {
-            System.out.print(nodo.valor + " ");
-            recorridoPreOrden(nodo.izquierda);
-            recorridoPreOrden(nodo.derecha);
-        }
-    }
-
-    public void recorridoPostOrden(NodoArbol nodo) {
-        if (nodo != null) {
-            recorridoPostOrden(nodo.izquierda);
-            recorridoPostOrden(nodo.derecha);
-            System.out.print(nodo.valor + " ");
-        }
-    }
-
-    public NodoArbol getRaiz() {
-        return raiz;
-    }
+//    public void recorridoInOrden(NodoArbol nodo) {
+//        if (nodo != null) {
+//            recorridoInOrden(nodo.izquierda);
+//            System.out.print(nodo.valor + " ");
+//            recorridoInOrden(nodo.derecha);
+//        }
+//    }
+//
+//    public void recorridoPreOrden(NodoArbol nodo) {
+//        if (nodo != null) {
+//            System.out.print(nodo.valor + " ");
+//            recorridoPreOrden(nodo.izquierda);
+//            recorridoPreOrden(nodo.derecha);
+//        }
+//    }
+//
+//    public void recorridoPostOrden(NodoArbol nodo) {
+//        if (nodo != null) {
+//            recorridoPostOrden(nodo.izquierda);
+//            recorridoPostOrden(nodo.derecha);
+//            System.out.print(nodo.valor + " ");
+//        }
+//    }
+//
+//    public NodoArbol getRaiz() {
+//        return raiz;
+//    }
 }
