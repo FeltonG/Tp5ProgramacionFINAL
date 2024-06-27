@@ -1,32 +1,12 @@
 public class NodoArbol {
-    int valor;
+    String valor;
     NodoArbol derecha;
     NodoArbol izquierda;
 
-    public NodoArbol(int valor){
-        this.valor= valor;
-        this.derecha=null;
-        this.izquierda=null;
-
-    }
-
-    public int getValor() {
-        return valor;
-    }
-
-    public void setValor(int valor) {
+    // Constructor que inicializa el valor del nodo y los hijos como nulos
+    public NodoArbol(String valor) {
         this.valor = valor;
+        this.derecha = null;
+        this.izquierda = null;
     }
-
-    public NodoArbol getDerecha() {
-        return derecha;
-    }
-
-
-    public NodoArbol getIzquierda() {
-        return izquierda;
-    }
-
-
-
 }
