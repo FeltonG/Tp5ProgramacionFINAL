@@ -2,17 +2,15 @@ import javax.swing.*;
 
 public class PantallaPrincipal {
     private JLabel titulo;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField inputVariable;
+    private JTextField inputExpresion;
     private JButton btnEnter;
-    private JTextField textField3;
+    private JTextField inputResultado;
     private JPanel fondoPantalla;
     private JButton btBorrarTodo;
     private JLabel txtVariable;
-    private JLabel TxtExpresion;
+    private JLabel txtExpresion;
     private JLabel txtResultado;
 
-    private void createUIComponents() {
 
-    }
 }
