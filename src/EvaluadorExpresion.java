@@ -10,15 +10,15 @@ public class EvaluadorExpresion {
         return arbolExpresion.evaluar(valorVariable);
     }
 
-//    public void imprimirInOrden() {
-//        arbolExpresion.recorridoInOrden(arbolExpresion.getRaiz());
-//    }
-//
-//    public void imprimirPreOrden() {
-//        arbolExpresion.recorridoPreOrden(arbolExpresion.getRaiz());
-//    }
-//
-//    public void imprimirPostOrden() {
-//        arbolExpresion.recorridoPostOrden(arbolExpresion.getRaiz());
-//    }
+    public void imprimirInOrden() {
+        arbolExpresion.recorridoInOrden(arbolExpresion.getRaiz());
+    }
+
+    public void imprimirPreOrden() {
+        arbolExpresion.recorridoPreOrden(arbolExpresion.getRaiz());
+    }
+
+    public void imprimirPostOrden() {
+        arbolExpresion.recorridoPostOrden(arbolExpresion.getRaiz());
+    }
 }
