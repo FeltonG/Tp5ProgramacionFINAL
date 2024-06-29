@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,6 +11,8 @@ public class PantallaPrincipal {
     private JButton btnBorrarTodo;
     private JLabel txtExpresion;
     private JLabel txtResultado;
+    private JTextPane textPane1;
+    private JLabel expresionesGuardadastxt;
     private EvaluadorExpresion evaluadorExpresion;
 
     public PantallaPrincipal() {
