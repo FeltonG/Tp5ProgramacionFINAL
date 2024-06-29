@@ -1,7 +1,7 @@
 import java.util.Stack;
 
 public class ArbolExpresion {
-    private NodoArbol raiz;
+    private final NodoArbol raiz;
 
     public ArbolExpresion(String expresion) {
         String expresionPostfija = convertirInfijoAPostfijo(expresion);
@@ -64,8 +64,8 @@ public class ArbolExpresion {
                 t1 = stack.pop();
                 t2 = stack.pop();
 
-                t.derecha = t1;
-                t.izquierda = t2;
+                t.setDerecha(t1);
+                t.setIzquierda(t2);
 
                 stack.push(t);
             }
@@ -86,18 +86,18 @@ public class ArbolExpresion {
             return 0;
         }
 
-        if (!esOperador(nodo.valor.charAt(0))) {
-            if (nodo.valor.equals("x")) {
+        if (!esOperador(nodo.getValor().charAt(0))) {
+            if (nodo.getValor().equals("x")) {
                 return valorVariable;
             } else {
-                return Double.parseDouble(nodo.valor);
+                return Double.parseDouble(nodo.getValor());
             }
         }
 
-        double izquierdaEval = evaluar(nodo.izquierda, valorVariable);
-        double derechaEval = evaluar(nodo.derecha, valorVariable);
+        double izquierdaEval = evaluar(nodo.getIzquierda(), valorVariable);
+        double derechaEval = evaluar(nodo.getDerecha(), valorVariable);
 
-        switch (nodo.valor) {
+        switch (nodo.getValor()) {
             case "+":
                 return izquierdaEval + derechaEval;
             case "-":
@@ -105,38 +105,17 @@ public class ArbolExpresion {
             case "*":
                 return izquierdaEval * derechaEval;
             case "/":
+                if (derechaEval == 0) {
+                    throw new ArithmeticException("División por cero");
+                }
                 return izquierdaEval / derechaEval;
+            default:
+                return 0;
         }
-
-        return 0;
     }
 
     public double evaluar(double valorVariable) {
         return evaluar(raiz, valorVariable);
-    }
-
-    public void recorridoInOrden(NodoArbol nodo) {
-        if (nodo != null) {
-            recorridoInOrden(nodo.izquierda);
-            System.out.print(nodo.valor + " ");
-            recorridoInOrden(nodo.derecha);
-        }
-    }
-
-    public void recorridoPreOrden(NodoArbol nodo) {
-        if (nodo != null) {
-            System.out.print(nodo.valor + " ");
-            recorridoPreOrden(nodo.izquierda);
-            recorridoPreOrden(nodo.derecha);
-        }
-    }
-
-    public void recorridoPostOrden(NodoArbol nodo) {
-        if (nodo != null) {
-            recorridoPostOrden(nodo.izquierda);
-            recorridoPostOrden(nodo.derecha);
-            System.out.print(nodo.valor + " ");
-        }
     }
 
     public NodoArbol getRaiz() {
