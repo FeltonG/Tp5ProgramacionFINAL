@@ -35,7 +35,7 @@ public class PantallaPrincipal {
                     // Actualizar el JTextField con la última expresión guardada
                     actualizarExpresionGuardada();
                 } catch (IllegalArgumentException ex) {
-                    JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "Error Debes Colocar una expresion SIN CARACTERES ESPECIALES " );
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Error al evaluar la expresión: " + ex.getMessage());
                 }
